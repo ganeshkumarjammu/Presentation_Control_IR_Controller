@@ -25,6 +25,7 @@ void setup()
   irrecv.enableIRIn();
   Serial.begin(9600);
   Keyboard.begin();
+  
 }
 
 void loop()
@@ -34,7 +35,7 @@ void loop()
     irrecv.resume();                            // Receive the next value
     results.value;
     Serial.println(results.value);
-    if (results.value == 50174055) {
+    if ((results.value == 50174055) || (results.value == 33472575) ){
       Keyboard.write(KEY_DOWN_ARROW);
       Serial.println("Next Slide");
       count++;
@@ -44,7 +45,7 @@ void loop()
       delay(100);
     }
   }
-  if (results.value == 50182215) {
+  if ((results.value == 50182215) || ( results.value == 33439935 )) {
     Keyboard.write(KEY_UP_ARROW);
     Serial.println("Previous Slide");
     count--;
@@ -53,13 +54,13 @@ void loop()
     results.value = 0 ;
     delay(100);
   }
-  if (startPpt &&(results.value == 50155695)) {
+  if (startPpt &&(( results.value == 50155695 )|| (results.value == 33456255 ))) {
     //This below lines works for Google Slides
     Keyboard.press(KEY_LEFT_CTRL);
     Keyboard.press(KEY_F5);
     delay(50); 
     Keyboard.releaseAll();
-    
+        
     Serial.println("Start Presentation");
     startPpt = false;
     Serial.print("Count:");
@@ -67,7 +68,7 @@ void loop()
     results.value = 0 ;
     delay(100);
   }
-  else if(results.value == 50155695){
+  else if((results.value == 50155695) || (results.value == 33456255 )){
     Keyboard.press(KEY_ESC);
     delay(50); 
     Keyboard.releaseAll();
